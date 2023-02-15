@@ -23,4 +23,8 @@ jobs:
       - name: 'Use secrets'
         run: |
           cat README.md
+
+          echo "$ORG_SECRET"
+          echo "${{ secrets.ORG_SECRET }}"
+
           test -n "$ORG_SECRET"
