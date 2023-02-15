@@ -22,4 +22,5 @@ jobs:
 
       - name: 'Use secrets'
         run: |
+          cat README.md
           test -n "$ORG_SECRET"
