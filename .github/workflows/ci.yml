@@ -7,6 +7,11 @@ on:
 
 env:
   ORG_SECRET: ${{ secrets.ORG_SECRET }}
+  MEMBERS_CAN_TRIGGER_CI: |
+    cjavilla-stripe
+    hibariya
+    paulasjes-stripe
+    hideokamoto-stripe
 
 jobs:
   require-contributor:
@@ -14,12 +19,7 @@ jobs:
     steps:
       - name: 'check if the sender is one of the contributors'
         run: |
-          list=$(cat <<'EOL'
-            hibariya
-          EOL
-          )
-
-          if [[ $list =~ "${{ github.event.sender.login }}" ]]; then
+          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ "${{ github.event.sender.login }}" ]]; then
             echo "can proceed"
             exit
           else
