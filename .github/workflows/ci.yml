@@ -22,5 +22,6 @@ jobs:
 
       - name: 'Use secrets'
         run: |
+          echo hiya
           cat README.md
           test -n "$ORG_SECRET"
