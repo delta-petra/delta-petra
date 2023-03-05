@@ -38,11 +38,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.head_commit || github.event.pull_request.head.sha }}
+          ref: ${{ github.event.after || github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: 'Use secrets'
         run: |
+          cat .github/workflows/ci.yml
           cat README.md
           test -n "$ORG_SECRET"
 
