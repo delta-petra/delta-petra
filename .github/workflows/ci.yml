@@ -18,12 +18,12 @@ jobs:
   require-permission:
     runs-on: ubuntu-latest
     steps:
-      - name: 'check if the sender is one of the contributors'
+      - name: 'check if the triggering actor is one of the contributors'
         run: |
           echo "$MEMBERS_CAN_TRIGGER_CI"
 
           while read item; do
-            if [[ "$item" == "${{ github.event.sender.login }}" ]]; then
+            if [[ "$item" == "${{ github.triggering_actor }}" ]]; then
               exit # has permission
             fi
           done <<< "$MEMBERS_CAN_TRIGGER_CI"
