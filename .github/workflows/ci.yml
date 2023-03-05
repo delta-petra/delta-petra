@@ -16,6 +16,7 @@ jobs:
         run: |
           list=$(cat <<'EOL'
             hibariya
+            hibariya-lerche
           EOL
           )
 
