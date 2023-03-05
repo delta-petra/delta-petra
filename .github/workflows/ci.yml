@@ -14,9 +14,10 @@ jobs:
     steps:
       - name: 'check if the sender is one of the contributors'
         run: |
-          list=<<EOL
+          list=$(cat <<'EOL'
             hibariya
           EOL
+          )
 
           if [[ $list =~ "${{ github.event.sender.login }}" ]]; then
             echo "can proceed"
