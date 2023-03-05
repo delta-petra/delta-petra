@@ -33,7 +33,7 @@ jobs:
           exit 1
 
   use-secrets:
-    needs: ['require-contributor']
+    needs: ['require-permission']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
