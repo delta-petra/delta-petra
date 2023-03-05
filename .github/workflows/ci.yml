@@ -19,7 +19,9 @@ jobs:
     steps:
       - name: 'check if the sender is one of the contributors'
         run: |
-          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ "^\s*${{ github.event.sender.login }}\s*$" ]]; then
+          echo "$MEMBERS_CAN_TRIGGER_CI"
+
+          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ ^[[:space:]]*${{ github.event.sender.login }}[[:space:]]*$" ]]; then
             echo "can proceed"
             exit
           else
