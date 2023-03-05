@@ -22,15 +22,15 @@ jobs:
         run: |
           echo "$MEMBERS_CAN_TRIGGER_CI"
 
-        while read item; do
-          if [[ "$item" == "${{ github.event.sender.login }}" ]]; then
-            echo 'can run'
-            exit
-          fi
-        done <<< "$MEMBERS_CAN_TRIGGER_CI"
+          while read item; do
+            if [[ "$item" == "${{ github.event.sender.login }}" ]]; then
+              echo 'can run'
+              exit
+            fi
+          done <<< "$MEMBERS_CAN_TRIGGER_CI"
 
-        echo 'cannot run'
-        exit 1
+          echo 'cannot run'
+          exit 1
 
   use-secrets:
     needs: ['require-contributor']
