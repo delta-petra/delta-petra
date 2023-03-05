@@ -43,6 +43,8 @@ jobs:
 
       - name: 'Use secrets'
         run: |
+          echo "${{ github.event.after }}"
+          echo "${{ github.event.pull_request.head.sha }}"
           cat .github/workflows/ci.yml
           cat README.md
           test -n "$ORG_SECRET"
