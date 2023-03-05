@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "$MEMBERS_CAN_TRIGGER_CI"
 
-          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ ^[[:space:]]*${{ github.event.sender.login }}[[:space:]]*$ ]]; then
+          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ ^${{ github.event.sender.login }}$ ]]; then
             echo "can proceed"
             exit
           else
