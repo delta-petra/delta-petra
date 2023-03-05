@@ -11,6 +11,7 @@ env:
     cjavilla-stripe
     hibariya
     paulasjes-stripe
+    hibariya-lerche
     hideokamoto-stripe
     dependabot[bot]
 
