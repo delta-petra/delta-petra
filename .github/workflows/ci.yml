@@ -10,6 +10,7 @@ env:
   MEMBERS_CAN_TRIGGER_CI: |
     cjavilla-stripe
     hibariya
+    hibariya-lerche
     paulasjes-stripe
     hideokamoto-stripe
     dependabot[bot]
