@@ -24,12 +24,11 @@ jobs:
 
           while read item; do
             if [[ "$item" == "${{ github.event.sender.login }}" ]]; then
-              echo 'can run'
-              exit
+              exit # has permission
             fi
           done <<< "$MEMBERS_CAN_TRIGGER_CI"
 
-          echo 'cannot run'
+          echo 'CI have to be re-run by one of the $MEMBERS_CAN_TRIGGER_CI' >> $GITHUB_STEP_SUMMARY
           exit 1
 
   use-secrets:
@@ -38,8 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          #ref: ${{ github.event.after || github.event.pull_request.head.sha }}
-          ref: ${{ github.event.pull_request.head.sha || github.event.after }}
+          ref: ${{ github.event.after || github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: 'Use secrets'
