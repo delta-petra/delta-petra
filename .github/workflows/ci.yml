@@ -12,22 +12,25 @@ env:
     hibariya
     paulasjes-stripe
     hideokamoto-stripe
+    dependabot[bot]
 
 jobs:
-  require-contributor:
+  require-permission:
     runs-on: ubuntu-latest
     steps:
       - name: 'check if the sender is one of the contributors'
         run: |
           echo "$MEMBERS_CAN_TRIGGER_CI"
 
-          if [[ "$MEMBERS_CAN_TRIGGER_CI" =~ (^|[[:space:]])${{ github.event.sender.login }}([[:space:]]|$) ]]; then
-            echo "can proceed"
+        while read item; do
+          if [[ "$item" == "${{ github.event.sender.login }}" ]]; then
+            echo 'can run'
             exit
-          else
-            echo "cannot proceed"
-            exit 1
           fi
+        done <<< "$MEMBERS_CAN_TRIGGER_CI"
+
+        echo 'cannot run'
+        exit 1
 
   use-secrets:
     needs: ['require-contributor']
@@ -35,10 +38,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.head_commit || github.event.pull_request.head.sha }}
           fetch-depth: 0
 
       - name: 'Use secrets'
         run: |
           cat README.md
           test -n "$ORG_SECRET"
+
